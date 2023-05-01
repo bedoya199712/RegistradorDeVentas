@@ -1,0 +1,21 @@
+#contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px;
+    background: #f8f6f6;
+  }
+
+img {
+    width: 100%;
+  }
+
+.button:hover {
+    background-color: #87d501;
+}
+
+.textos {
+    font-family: sans-serif;
+    font-size:larger;
+}
