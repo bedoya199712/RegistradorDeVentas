@@ -11,7 +11,7 @@ function crearVenta(){
 
         if (nombreVideojuego.length != 0 && valorVideojuego.length != 0) {
             $.ajax({
-                url: "http://localhost",
+                url: "http://localhost/videojuegos",
                 type: "POST",
                 data: JSON.stringify({
                     console: nombreVideojuego,

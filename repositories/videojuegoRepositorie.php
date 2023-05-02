@@ -1,13 +1,10 @@
 <?php
-
-class VideojuegoModel{
-    
+class VideojuegoRepositorie {
     private $conexion;
-    private $data;
-    
-    //instancia de la conexion
+    private $data = 0;
+
     public function __construct() {
-        $this->conexion = require('configDB/config.php');
+        $this->conexion = require('../configDB/config.php');
     }
 
     //Metodos para el videojuego
@@ -22,8 +19,8 @@ class VideojuegoModel{
             }
             header("HTTP/1.1 200 OK");
             header("Content-Type: application/json");
-            $this->data = array("totalDescuentos" => $descuentos);
-            return json_encode($this->data);
+            $this->data = $descuentos;
+            return $this->data;
         }
     }
 
@@ -38,7 +35,6 @@ class VideojuegoModel{
                 $precio_maximo = $row['precio_maximo']; 
                 $descuento = $row['descuento']; 
             }
-
 
             $valorCobrarCliente = $this->aplicarDescuento($precio_maximo,$precio_minimo,$descuento,$valorVenta);
             $descuento = $valorVenta - $valorCobrarCliente;
@@ -73,6 +69,4 @@ class VideojuegoModel{
         return $valorDescuento;
     }
 }
-
-
 ?>

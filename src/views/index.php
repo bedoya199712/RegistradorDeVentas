@@ -4,7 +4,7 @@
 <head>
     <?php
     $titulo_pagina = "Prueba tecnica";
-    include "src/commons/header.php";   
+    include "../src/commons/header.php";   
     ?>
 </head>
 
@@ -34,7 +34,7 @@
 
 
     <?php 
-        include "src/commons/footer.php";
+        include "../src/commons/footer.php";
     ?>    
 </body>
 

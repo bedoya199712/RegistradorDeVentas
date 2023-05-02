@@ -1,10 +1,9 @@
 <?php
-require('models/videojuegoModel.php');
-$videojuegoService = new videojuegoModel();
+require('../services/videojuegoService.php');
+$videojuegoService = new VideojuegoService();
 
 function getIndex($videojuegoService) {
-    
-    include 'src\views\index.php';
+    include '../src/views/index.php';
 }
 
 function postIndex($videojuegoService) {
@@ -14,9 +13,6 @@ function postIndex($videojuegoService) {
         $valorVenta = $ventaJson['valor'];
         $datos = $videojuegoService->createVenta($console,$valorVenta);
         echo $datos;
-        return $datos;
-
-        getIndex();
 }
 
 switch($_SERVER['REQUEST_METHOD']) {
