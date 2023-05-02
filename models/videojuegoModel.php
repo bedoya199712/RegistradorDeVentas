@@ -12,6 +12,21 @@ class VideojuegoModel{
 
     //Metodos para el videojuego
 
+    function getDescuentos(){
+        $data = 0;
+        $sql = "SELECT SUM(descuento) AS suma_total FROM ventas";
+        $resultSql =  $this->conexion->query($sql);
+        if (isset($resultSql) and mysqli_num_rows($resultSql) != 0) {
+            foreach ($resultSql as $row) {
+                $descuentos = $row['suma_total'];
+            }
+            header("HTTP/1.1 200 OK");
+            header("Content-Type: application/json");
+            $this->data = array("totalDescuentos" => $descuentos);
+            return json_encode($this->data);
+        }
+    }
+
     function createVenta($console,$valorVenta){
         $valorCobrarCliente = 0;
         $sql = "SELECT id,precio_minimo,precio_maximo,descuento FROM videojuegos WHERE consola = '$console'";
@@ -23,11 +38,13 @@ class VideojuegoModel{
                 $precio_maximo = $row['precio_maximo']; 
                 $descuento = $row['descuento']; 
             }
-            $console = strtoupper($console);
-            $sqlInsert = "INSERT INTO venta (consola,valor_venta) VALUES ('$console','$valorVenta')";
-            $resultSqlInsert = $this->conexion->query($sqlInsert);
+
 
             $valorCobrarCliente = $this->aplicarDescuento($precio_maximo,$precio_minimo,$descuento,$valorVenta);
+            $descuento = $valorVenta - $valorCobrarCliente;
+            $console = strtoupper($console);
+            $sqlInsert = "INSERT INTO ventas (consola,valor_venta,descuento) VALUES ('$console','$valorCobrarCliente','$descuento')";
+            $resultSqlInsert = $this->conexion->query($sqlInsert);
             header("HTTP/1.1 200 OK");
             header("Content-Type: application/json");
             $this->data = array("valorCobrarCliente" => $valorCobrarCliente);

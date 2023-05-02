@@ -2,8 +2,9 @@
 require('models/videojuegoModel.php');
 $videojuegoService = new videojuegoModel();
 
-function getIndex() {
-        include 'src\views\index.php';
+function getIndex($videojuegoService) {
+    
+    include 'src\views\index.php';
 }
 
 function postIndex($videojuegoService) {
@@ -14,11 +15,13 @@ function postIndex($videojuegoService) {
         $datos = $videojuegoService->createVenta($console,$valorVenta);
         echo $datos;
         return $datos;
+
+        getIndex();
 }
 
 switch($_SERVER['REQUEST_METHOD']) {
         case 'GET': {
-            getIndex();
+            getIndex($videojuegoService);
             break;
         }
         case 'POST': {
