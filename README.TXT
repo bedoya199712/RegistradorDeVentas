@@ -1,3 +1,3 @@
-Prueba tecnica strategico
+Registrador de ventas.
 
-Api rest que tendra ciertos servicios.
+Apis-Rest - PHP - HTML - CSS - JAVASCRIPT - BOOSTRAP.
